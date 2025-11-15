@@ -59,41 +59,47 @@
     </div
 </section>
 
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lightbox">
-    <img id="lightbox-img" src="">
+<!-- GALLERY -->
+<div class="gallery-grid">
+    <img src="images/pic1.jpg" class="thumb">
+    <img src="images/pic2.jpg" class="thumb">
+    <img src="images/pic3.jpg" class="thumb">
 </div>
 
-<!-- Image Popup Modal -->
-<div id="popup" class="popup">
-    <div class="popup-content">
-        <span class="close-btn">&times;</span>
-        <img id="popup-img" src="">
+<!-- POPUP WINDOW -->
+<div id="popup-window" class="popup-window">
+    <div class="popup-inner">
+        <span id="popup-close" class="popup-close">&times;</span>
+        <img id="popup-image" src="">
     </div>
 </div>
 
 <script>
-const popup = document.getElementById('popup');
-const popupImg = document.getElementById('popup-img');
-const closeBtn = document.querySelector('.close-btn');
-
-document.querySelectorAll('.gallery-grid img').forEach(img => {
+// Open popup
+document.querySelectorAll('.thumb').forEach(img => {
     img.addEventListener('click', () => {
-        popupImg.src = img.src;
-        popup.classList.add('active');
+        document.getElementById('popup-image').src = img.src;
+        document.getElementById('popup-window').classList.add('show');
     });
 });
 
-closeBtn.addEventListener('click', () => {
-    popup.classList.remove('active');
+// Close popup
+document.getElementById('popup-close').addEventListener('click', () => {
+    document.getElementById('popup-window').classList.remove('show');
 });
 
-popup.addEventListener('click', (e) => {
-    if (e.target === popup) popup.classList.remove('active');
+// Close by clicking outside inner box
+document.getElementById('popup-window').addEventListener('click', e => {
+    if (e.target === e.currentTarget) {
+        e.currentTarget.classList.remove('show');
+    }
 });
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') popup.classList.remove('active');
+// ESC closes
+document.addEventListener('keydown', e => {
+    if (e.key === "Escape") {
+        document.getElementById('popup-window').classList.remove('show');
+    }
 });
 </script>
 
