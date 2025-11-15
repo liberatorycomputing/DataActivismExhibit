@@ -57,6 +57,36 @@
     </div
 </section>
 
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+    <img id="lightbox-img" src="">
+</div>
+
+<script>
+document.querySelectorAll('.gallery-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+    });
+});
+
+document.getElementById('lightbox').addEventListener('click', () => {
+    document.getElementById('lightbox').classList.remove('active');
+});
+
+// Close on ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+        document.getElementById('lightbox').classList.remove('active');
+    }
+});
+</script>
+
+
+
+    
 <section id="process" class="section">
     <div class="glass">
         <h2>Concept & Process</h2>
