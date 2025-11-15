@@ -62,25 +62,36 @@
     <img id="lightbox-img" src="">
 </div>
 
+<!-- Image Popup Modal -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <img id="popup-img" src="">
+    </div>
+</div>
+
 <script>
+const popup = document.getElementById('popup');
+const popupImg = document.getElementById('popup-img');
+const closeBtn = document.querySelector('.close-btn');
+
 document.querySelectorAll('.gallery-grid img').forEach(img => {
     img.addEventListener('click', () => {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
+        popupImg.src = img.src;
+        popup.classList.add('active');
     });
 });
 
-document.getElementById('lightbox').addEventListener('click', () => {
-    document.getElementById('lightbox').classList.remove('active');
+closeBtn.addEventListener('click', () => {
+    popup.classList.remove('active');
 });
 
-// Close on ESC
+popup.addEventListener('click', (e) => {
+    if (e.target === popup) popup.classList.remove('active');
+});
+
 document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        document.getElementById('lightbox').classList.remove('active');
-    }
+    if (e.key === 'Escape') popup.classList.remove('active');
 });
 </script>
 
